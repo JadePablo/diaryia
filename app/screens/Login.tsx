@@ -16,7 +16,7 @@ const Login = () => {
         setLoading(true);
         try {
             await signIn(auth, email, password);
-        } catch (error) {
+        } catch (error: any) {
             alert('Sign in failed: ' + error.message);
         } finally {
             setLoading(false);
@@ -28,7 +28,7 @@ const Login = () => {
         try {
             await signUp(auth, email, password);
             alert('Check your emails');
-        } catch (error) {
+        } catch (error: any) {
             alert('Sign up failed: ' + error.message);
         } finally {
             setLoading(false);
@@ -62,10 +62,9 @@ const Login = () => {
                     <>
                         <TouchableHighlight
                             style={styles.button}
-                            underlayColor="black"
                             onPress={handleSignIn}
                         >
-                            <Text style={styles.buttonText}>Login</Text>
+                            <Text style={styles.buttonText}>login</Text>
                         </TouchableHighlight>
 
                         <TouchableHighlight
@@ -73,7 +72,7 @@ const Login = () => {
                             underlayColor="black"
                             onPress={handleSignUp}
                         >
-                            <Text style={styles.buttonText}>Sign Up</Text>
+                            <Text style={styles.buttonText}>sign up</Text>
                         </TouchableHighlight>
                     </>
                 )}

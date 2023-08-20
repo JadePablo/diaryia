@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './app/screens/Login';
 import Homepage from './app/screens/Homepage';
 import Create from './app/screens/Create';
-import Countdown from './app/screens/Countdown';
+import Recap from './app/screens/Recap';
 import { useState , useEffect } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
@@ -16,7 +16,7 @@ function InsideLayout() {
     <loggedInStack.Navigator>
       <loggedInStack.Screen name="homepage" component={Homepage} options={{ headerShown: false }}/>
       <loggedInStack.Screen name="create" component={Create} options={{ headerShown: false }}/>
-      <loggedInStack.Screen name="countdown" component={Countdown} options={{ headerShown: false }}/>
+      <loggedInStack.Screen name="recap" component={Recap} options={{ headerShown: false }}/>
     </loggedInStack.Navigator>
   )
 }

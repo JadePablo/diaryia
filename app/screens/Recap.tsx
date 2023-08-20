@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Countdown = () => {
+const Recap = () => {
   return (
     <View>
-      <Text>Countdown</Text>
+      <Text>Recap</Text>
     </View>
   )
 }
 
-export default Countdown
+export default Recap
