@@ -79,6 +79,6 @@ export const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 8,
         marginTop: 10,
-        height: '50%',
+        height: '25%',
       }
 });
