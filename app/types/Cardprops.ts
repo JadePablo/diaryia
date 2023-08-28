@@ -4,7 +4,6 @@ interface CardProps {
     date_created: Date;
     open_date: Date;
     title: string;
-    text: string;
     image: string;
     navigation: NavigationProp<any,any>;
   }

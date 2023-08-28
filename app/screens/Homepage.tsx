@@ -73,12 +73,11 @@ const Homepage = ({ navigation }: RouterProps) => {
   const renderCards = () => {
     return cardsData.map((card, index) => (
       <Card 
-        key={index}
+        key={index} //replace this witih the firebase id of the entry
         date_created={new Date()}
         open_date={new Date()}
         title={card.title}
         image={card.image}
-        text={"hello"}
         navigation={navigation}
       />
     ));
