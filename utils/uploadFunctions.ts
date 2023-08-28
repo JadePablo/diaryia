@@ -1,31 +1,12 @@
 import { FIREBASE_STOR,FIREBASE_DB } from "../FirebaseConfig";
 import {addDoc , collection } from 'firebase/firestore';
-import { uploadString,ref } from 'firebase/storage';
+import EntryContents from "../app/types/Entryprops";
+import { uploadBytes,ref, getDownloadURL, deleteObject } from 'firebase/storage';
 
-
-//upload photo to storage bucket before submitting
-
-interface EntryContents {
-    date: Date,
-    text_content: String,
-    user_id: Number,
-    photoUrl?: String | null
-}
-
-const storageRef = ref(FIREBASE_STOR, 'images');
-
-const submitPhoto = async (imageURI: string) => {
-
-    
-    uploadString(storageRef,imageURI,'base64').then((snapshot) => {
-        console.log('Uploaded a base64 string!');
-    }); 
-}
-export const submitEntry = async (entry: EntryContents ) => {
+async function submitEntry (entry: EntryContents ) {
 
     if (entry.text_content.length < 30) {
         throw new Error("Text content must be at least 30 characters long");
-
     }
     
     // Create a promise to handle success and error
@@ -49,3 +30,47 @@ export const submitEntry = async (entry: EntryContents ) => {
     });
 
 }
+
+async function submitPhoto(image: string) {
+    const blob: Blob = await new Promise((resolve,reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+  
+        xhr.onerror = function (e) {
+          console.log(e);
+          reject(new TypeError("network request failed"));
+        }
+  
+        xhr.responseType = "blob";
+        xhr.open("GET",image,true);
+        xhr.send(null);
+      });
+
+      try {
+        const storageRef = ref(FIREBASE_STOR,`Images/image-${Date.now()}`);
+        const result = await uploadBytes(storageRef,blob);
+  
+        const photo_ref = await getDownloadURL(storageRef);
+
+        return photo_ref
+
+      } catch (e) {
+        alert(`error: ${e}`)
+      }
+}
+
+async function deletePhoto(imageRef: string) {
+    const deleteRef = ref(FIREBASE_STOR,imageRef);
+
+    deleteObject(deleteRef).then(() => {
+        // File deleted successfully
+        console.log('deleted photo');
+      }).catch((error) => {
+        // Uh-oh, an error occurred!
+        console.log(error);
+      });
+}  
+
+export {submitPhoto,submitEntry,deletePhoto}
