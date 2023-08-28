@@ -4,6 +4,7 @@ import Login from './app/screens/Login';
 import Homepage from './app/screens/Homepage';
 import Create from './app/screens/Create';
 import Recap from './app/screens/Recap';
+import Entry from './app/screens/Entry';
 import { useState , useEffect } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
@@ -17,6 +18,7 @@ function InsideLayout() {
       <loggedInStack.Screen name="homepage" component={Homepage} options={{ headerShown: false }}/>
       <loggedInStack.Screen name="create" component={Create} options={{ headerShown: false }}/>
       <loggedInStack.Screen name="recap" component={Recap} options={{ headerShown: false }}/>
+      <loggedInStack.Screen name="entry" component={Entry} options={{headerShown:false}} />
     </loggedInStack.Navigator>
   )
 }

@@ -72,6 +72,11 @@ export const styles = StyleSheet.create({
     cardInfo: {
         color: 'white',
     },
+    cardImage: {
+        width: 80, // Adjust the width of the image
+        height: 80, // Adjust the height of the image
+        borderRadius: 8,
+      },
     textInput: {
         borderWidth: 1, // Add border
         borderColor: 'white', // White border color
