@@ -14,6 +14,7 @@ async function submitEntry (entry: EntryContents ) {
         //in later version, get the nlp goodies and put em in the upload
 
         addDoc(collection(FIREBASE_DB, "entry"), {
+            title: entry.title,
             created: new Date(),
             unlock: entry.date,
             photo_url: entry.photoUrl,

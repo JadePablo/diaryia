@@ -85,5 +85,14 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         marginTop: 10,
         height: '25%',
-      }
+    },
+    titleInput: {
+        borderWidth: 1, // Add border
+        borderColor: 'white', // White border color
+        color: 'white', // White text color
+        padding: 10,
+        borderRadius: 8,
+        marginTop: 10,
+    }
+
 });

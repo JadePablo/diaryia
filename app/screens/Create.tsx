@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, View, Image , Text, TextInput, SafeAreaView, TouchableOpacity, Platform } from 'react-native';
+import { Alert, View, Image , Text, TextInput, SafeAreaView, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 import { styles } from '../../assets/styles/globalStyles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
@@ -8,6 +8,7 @@ import RouterProps from '../types/Navigationprops';
 
 const Create = ({navigation} : RouterProps) => {
   const [userInput, setUserInput] = useState('');
+  const [title,setTitle] = useState('');
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [image, setImage] = useState('');
@@ -28,9 +29,9 @@ const Create = ({navigation} : RouterProps) => {
     setLoading(true);
     try {
       await submit({
+        title:title,
         date: date,
         text_content: userInput,
-        user_id: 3,
         photoUrl: image
       })
       setLoading(false);
@@ -64,7 +65,15 @@ const Create = ({navigation} : RouterProps) => {
     <SafeAreaView style={styles.homepageContainer}>
       
       <Text style={styles.title}>Write</Text>
-      
+      <TextInput
+        value={title}
+        onChangeText={setTitle}
+        placeholder="title"
+        style={[styles.titleInput, { textAlignVertical: 'top' }]}
+        placeholderTextColor="white"
+        selectionColor="white"
+        underlineColorAndroid="white"
+      />
       <TextInput
         value={userInput}
         onChangeText={setUserInput}
@@ -104,10 +113,21 @@ const Create = ({navigation} : RouterProps) => {
           onChange={onChange}
         />
       )}
+      
+      {
+        loading ?
+        (
+          <ActivityIndicator color="white" />
+        )
+        :
+        (
+          <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+            <Text style={styles.buttonText}>save</Text>
+          </TouchableOpacity>
+        )
 
-      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-        <Text style={styles.buttonText}>save</Text>
-      </TouchableOpacity>
+      }
+
       </View>
     </SafeAreaView>   
   );
