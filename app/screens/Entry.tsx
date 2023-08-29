@@ -1,33 +1,17 @@
 import { Image, Text, View } from 'react-native'
 import React, { Component , useState, useEffect } from 'react'
-import {ref, getDownloadURL} from 'firebase/storage';
-import { FIREBASE_STOR } from '../../FirebaseConfig';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../../assets/styles/globalStyles';
+import EntryContents from '../types/Entryprops';
 
 
-const Entry = () => {
-  
-    useEffect(() => {
-      // const fetchImage = async () => {
-      //   try {
-      //     console.log('trying fetch');
-      //     const storageRef = ref(FIREBASE_STOR, imageUrl);
-      //     const url = await getDownloadURL(storageRef);
-      //     console.log(url);
-      //     setDownloadUrl(url);
-      //   } catch (error) {
-      //     console.error('Error fetching image URL:', error);
-      //   }
-      // };
-  
-      // fetchImage();
-    }, []);
+const Entry = (props: EntryContents) => {
+
 
     return (
         <SafeAreaView style={styles.homepageContainer}>
           <View>
-            <Text style={styles.title}>Hello</Text>
+            <Text style={styles.title}>{props.title}</Text>
           </View>
         </SafeAreaView>
     )

@@ -1,10 +1,12 @@
-import {View, Text, SafeAreaView , TouchableHighlight , ScrollView} from 'react-native'
-import React from 'react'
+import { Alert, View, Text, SafeAreaView , TouchableHighlight , ScrollView} from 'react-native'
+import React , { useState , useEffect } from 'react'
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { styles } from '../../assets/styles/globalStyles';
 import Card from '../components/Homepage/Card';
 import RouterProps from '../types/Navigationprops';
-
+import { fetchEntries } from '../api/Download';
+import Entry from '../types/Homepageprops';
+import { Timestamp } from 'firebase/firestore';
 
 const horizontalImage = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
 const verticalImage = "https://images.unsplash.com/photo-1526512340740-9217d0159da9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVydGljYWx8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
@@ -70,18 +72,37 @@ const cardsData = [
 
 const Homepage = ({ navigation }: RouterProps) => {
 
+  const [previews,setPreviews] = useState<Entry[]>([]);
+
+  useEffect(
+     () => {
+    async function fetchData() {
+      try {
+        const entries = await fetchEntries(); // Assuming fetchEntries is an async function that fetches data
+        setPreviews(entries);
+      } catch (error) {
+        Alert.alert(`Error fetching entries: ${error}`);
+      }
+    }
+
+    fetchData();
+  }
+    ,[])
+  
   const renderCards = () => {
-    return cardsData.map((card, index) => (
+    return previews.map((preview, index) => (
       <Card 
         key={index} //replace this witih the firebase id of the entry
-        date_created={new Date()}
-        open_date={new Date()}
-        title={card.title}
-        image={card.image}
+        date_created={preview.created.toDate()}
+        open_date={preview.unlock.toDate()}
+        text={preview.text_content}
+        title={preview.title}
+        image={preview.photo_url}
         navigation={navigation}
       />
     ));
   };
+  
   
   return (
     <SafeAreaView style={styles.homepageContainer}>

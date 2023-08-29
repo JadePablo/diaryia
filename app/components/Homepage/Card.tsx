@@ -24,9 +24,11 @@ const Card = (props: CardProps) => {
           <Text style={styles.cardInfo}>Created On: {props.date_created.toDateString()}</Text>
           <Text style={styles.cardInfo}>Open Date: {props.open_date.toDateString()}</Text>
         </View>
-        <View>
-          <Image source={{ uri: props.image }} style={styles.cardImage} />
-        </View>
+        {props.image !== '' && (
+          <View>
+            <Image source={{ uri: props.image }} style={styles.cardImage} />
+          </View>
+        )}
       </View>
     </TouchableHighlight>
   );
