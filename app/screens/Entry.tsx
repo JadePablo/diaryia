@@ -1,19 +1,31 @@
-import { Image, Text, View } from 'react-native'
+import { TouchableHighlight, ScrollView, Image, Text, View } from 'react-native'
 import React, { Component , useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../../assets/styles/globalStyles';
-import EntryContents from '../types/Entryprops';
 
-
-const Entry = (props: EntryContents) => {
-
+const Entry = ({route}:any)  => {
 
     return (
         <SafeAreaView style={styles.homepageContainer}>
-          <View>
-            <Text style={styles.title}>{props.title}</Text>
-          </View>
-        </SafeAreaView>
+            <View>
+              
+            <View style={styles.cardsContainer}>
+              <Text style={styles.title}>
+                {route.params.title}
+              </Text>
+              <Text style={styles.title}>{route.params.date_created}</Text>
+            </View>
+            <View style={styles.line} />
+            <Text style={styles.buttonText}>
+              {route.params.text}
+            </Text>
+            <View style={styles.line} />
+            {route.params.image !== '' && (
+            <Image source={{ uri: route.params.image }} style={styles.imageFull} />
+        )}
+            </View>
+
+       </SafeAreaView>
     )
 }
 

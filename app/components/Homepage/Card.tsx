@@ -12,7 +12,12 @@ const Card = (props: CardProps) => {
         `Can only open on or after the open date: ${props.open_date.toDateString()}`
       );
     } else {
-      props.navigation.navigate('entry');
+      props.navigation.navigate('entry',{
+        date_created: props.date_created.toDateString(),
+        text: props.text,
+        title: props.title,
+        image: props.image
+      });
     }
   };
 

@@ -87,7 +87,7 @@ const Homepage = ({ navigation }: RouterProps) => {
 
     fetchData();
   }
-    ,[])
+    ,[previews])
   
   const renderCards = () => {
     return previews.map((preview, index) => (

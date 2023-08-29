@@ -93,6 +93,24 @@ export const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 8,
         marginTop: 10,
-    }
+    },
+    line: {
+        borderBottomWidth: 1,
+        borderBottomColor: 'white', // Adjust the color as needed
+        marginVertical: 10, // Adjust the spacing as needed
+      },
+      imageFull: {
+        width: '50%', // Full width
+        height: '50%',
+        borderRadius: 8,
+        marginTop: 10, // Add some spacing between text and image
+    },
+    imageContainer: {
+        alignItems: 'center', // Center the image horizontally
+    },
+    scrollContent: {
+        paddingHorizontal: 20,
+        paddingBottom: 20, // Add some padding at the bottom for better scrolling experience
+    },
 
 });
