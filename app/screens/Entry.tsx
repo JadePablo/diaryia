@@ -9,12 +9,10 @@ const Entry = ({route}:any)  => {
         <SafeAreaView style={styles.homepageContainer}>
             <View>
               
-            <View style={styles.cardsContainer}>
               <Text style={styles.title}>
                 {route.params.title}
               </Text>
               <Text style={styles.title}>{route.params.date_created}</Text>
-            </View>
             <View style={styles.line} />
             <Text style={styles.buttonText}>
               {route.params.text}
