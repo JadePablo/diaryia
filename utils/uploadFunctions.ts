@@ -2,6 +2,7 @@ import { FIREBASE_STOR,FIREBASE_DB } from "../FirebaseConfig";
 import {addDoc , collection } from 'firebase/firestore';
 import EntryContents from "../app/types/Entryprops";
 import { uploadBytes,ref, getDownloadURL, deleteObject } from 'firebase/storage';
+import { analyse } from "../app/api/Analyse";
 
 async function submitEntry (entry: EntryContents ) {
 
@@ -62,6 +63,19 @@ async function submitPhoto(image: string) {
       }
 }
 
+async function submitAnalysis(text: string) {
+   try {
+    const analysis = await analyse(text);
+
+    const topic_results = analysis["topic-emotion-map"];
+    const entity_results = analysis["entity-emotion-map"];
+
+    
+   } catch (error) {
+      alert(`error: ${error}`)
+   }
+}
+
 async function deletePhoto(imageRef: string) {
     const deleteRef = ref(FIREBASE_STOR,imageRef);
 
@@ -74,4 +88,6 @@ async function deletePhoto(imageRef: string) {
       });
 }  
 
-export {submitPhoto,submitEntry,deletePhoto}
+
+
+export {submitPhoto,submitEntry,deletePhoto,submitAnalysis}

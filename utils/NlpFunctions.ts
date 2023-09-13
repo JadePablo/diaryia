@@ -73,5 +73,30 @@ async function getSentiment(text: string) {
   }
 }
 
-export {getTopic,getEntities,getSentiment}
+async function getEmotion(text: string) {
+  try {
+    const response = await fetch(
+        'https://apis.paralleldots.com/v4/emotion', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          api_key: process.env.EXPO_PUBLIC_KOMREPHEND_APITOKEN,
+          text: text,
+        }),
+      });
 
+      const json = await response.json();
+      
+      return json.data;
+
+} catch (error) {
+    console.log(error);
+    throw error;
+}
+}
+
+
+export {getTopic,getEntities,getSentiment,getEmotion}

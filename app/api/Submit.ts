@@ -33,6 +33,8 @@ export async function submit(entry: FormInput) {
             photoUrl: photo_ref // Pass photo_ref here, which can be undefined or a string
         });
 
+        
+
     } catch (e) {
         if (photoUploadSuccessful && photo_ref) {
             await deletePhoto(photo_ref);
